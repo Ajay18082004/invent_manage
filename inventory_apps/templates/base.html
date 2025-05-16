@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Inventory Management</h1>
+        
+    </header>
+
+    <nav class="nav-boxes">
+        <a href="{{ url_for('home') }}" class="nav-box">Home</a>
+        <a href="{{ url_for('products') }}" class="nav-box">Products</a>
+        <a href="{{ url_for('locations') }}" class="nav-box">Locations</a>
+        <a href="{{ url_for('movements') }}" class="nav-box">Movements</a>
+        <a href="{{ url_for('report') }}" class="nav-box">Report</a>
+    </nav>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+        <div>
+            <section class="recent-activity">
+                <h2>Recent Activity</h2>
+                <ul>
+                    <li><span class="activity-label">User updated quantity for Product A in Main Warehouse</span></li>
+                    <li><span class="activity-label">New item "Product XYZ" was added to inventory</span></li>
+                    <li><span class="activity-label">Stock transfer from Main Warehouse to North Facility</span></li>
+                    <li><span class="activity-label">Inventory report generated at 10:30 AM</span></li>
+                    <li><span class="activity-label">5 items received from Supplier X</span></li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Inventory Management System</p>
+    </footer>
+</body>
+</html>
